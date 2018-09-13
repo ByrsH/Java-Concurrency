@@ -1,6 +1,6 @@
 package org.yrs.concurrency.javaConcurrencyInPractice.chapter3;
 
-import jdk.nashorn.internal.ir.annotations.Immutable;
+import net.jcip.annotations.Immutable;
 
 import java.math.BigInteger;
 import java.util.Arrays;
