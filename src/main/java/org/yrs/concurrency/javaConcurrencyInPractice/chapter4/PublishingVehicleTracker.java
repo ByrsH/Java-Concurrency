@@ -8,31 +8,33 @@ import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author: yangrusheng
- * @Description: 将线程安全委托给ConcurrentHashMap
- * @Date: Created in 20:40 2018/9/13
+ * @Description: 安全发布底层状态的车辆追踪器
+ * @Date: Created in 10:46 2018/9/14
  * @Modified By:
  */
 @ThreadSafe
-public class DelegatingVehicleTracker {
-    private final ConcurrentHashMap<String, Point> locations;
-    private final Map<String, Point> unmodifiableMap;
+public class PublishingVehicleTracker {
 
-    public DelegatingVehicleTracker(Map<String, Point> points) {
-        this.locations = new ConcurrentHashMap<String, Point>(points);
+    private final Map<String, SafePoint> locations;
+    private final Map<String, SafePoint> unmodifiableMap;
+
+    public PublishingVehicleTracker(Map<String, SafePoint> locations) {
+        this.locations = new ConcurrentHashMap<String, SafePoint>(locations);
         this.unmodifiableMap = Collections.unmodifiableMap(locations);
     }
 
-    public Map<String, Point> getLocations() {
+    public Map<String, SafePoint> getLocations() {
         return unmodifiableMap;
     }
 
-    public Point getLocation(String id) {
+    public SafePoint getLocation(String id) {
         return locations.get(id);
     }
 
     public void setLocation(String id, int x, int y) {
-        if (locations.replace(id, new Point(x, y)) == null) {
+        if (!locations.containsKey(id)) {
             throw new IllegalArgumentException("invalid vehicle id: " + id);
         }
+        locations.get(id).set(x, y);
     }
 }
