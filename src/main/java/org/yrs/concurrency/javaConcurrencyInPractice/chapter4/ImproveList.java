@@ -11,7 +11,7 @@ import java.util.List;
  * @Modified By:
  */
 @ThreadSafe
-public class ImproveList<T> implements List<T> {
+public abstract class ImproveList<T> implements List<T> {
 
     private final List<T> list;
 

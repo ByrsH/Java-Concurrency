@@ -10,7 +10,10 @@ import java.util.concurrent.FutureTask;
  * @Date: Created in 9:29 2018/10/16
  * @Modified By:
  */
+
+
 public class Preloader {
+    /**
     private final FutureTask<ProductInfo> future = new FutureTask<ProductInfo>(new Callable<ProductInfo>() {
         @Override
         public ProductInfo call() throws DataLoadException {
@@ -36,7 +39,7 @@ public class Preloader {
             }
         }
     }
-
+     **/
     public static RuntimeException launderThrowable(Throwable t) {
         if (t instanceof RuntimeException) {
             return (RuntimeException) t;
@@ -46,5 +49,6 @@ public class Preloader {
             throw new IllegalArgumentException("Not unchecked", t);
         }
     }
+
 
 }

@@ -13,6 +13,7 @@ import java.util.concurrent.CyclicBarrier;
  */
 public class CellularAutomata {
 
+    /**
     private final Board mainBoard;
     private final CyclicBarrier barrier;
     private final Worker[] workers;
@@ -65,5 +66,6 @@ public class CellularAutomata {
         }
         mainBoard.waitForConvergence();
     }
+        **/
 
 }
